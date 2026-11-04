@@ -54,22 +54,22 @@
             android:layout_height="wrap_content"
             android:hint="Defendant ID" />
         
-        <EditText android:id="@+id/input_defid"
+        <EditText android:id="@+id/input_deposit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Deposit" />
+            android:hint="Deposit amount" />
         
-        <EditText android:id="@+id/input_defid"
+        <EditText android:id="@+id/input_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Day" />
+            android:hint="Day 1st" />
         
-        <EditText android:id="@+id/input_defid"
+        <EditText android:id="@+id/input_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Month" />
         
-        <EditText android:id="@+id/input_defid"
+        <EditText android:id="@+id/input_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Year" />
