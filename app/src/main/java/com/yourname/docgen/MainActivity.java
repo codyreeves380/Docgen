@@ -75,6 +75,10 @@ public class MainActivity extends Activity {
         replacements.put("[[CAUSENO]]", inputCauseNo.getText().toString().trim());
         replacements.put("[[DATE]]", inputDate.getText().toString().trim());
         replacements.put("[[DEFID]]", inputDefId.getText().toString().trim());
+        replacements.put("[[DEPOSIT]]", inputDefId.getText().toString().trim());
+        replacements.put("[[DAY]]", inputDefId.getText().toString().trim());
+        replacements.put("[[MONTH]]", inputDefId.getText().toString().trim());
+        replacements.put("[[YEAR]]", inputDefId.getText().toString().trim());
 
         if(replacements.get("[[DEFENDANT]]").isEmpty() || replacements.get("[[CAUSENO]]").isEmpty()) {
             txtStatus.setText("Status: Please enter Defendant and Cause No!");
