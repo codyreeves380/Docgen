@@ -53,6 +53,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Defendant ID" />
+        
+        <EditText android:id="@+id/input_defid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Deposit" />
+        
+        <EditText android:id="@+id/input_defid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Day" />
+        
+        <EditText android:id="@+id/input_defid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Month" />
+        
+        <EditText android:id="@+id/input_defid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Year" />
+
+
+
+
 
         <!-- Final Action Button -->
         <Button android:id="@+id/btn_generate"
