@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '17'
-        distribution: 'temurin' # Reverted back to a modern stable LTS distribution
+        distribution: 'temurin'
 
     - name: Set up Node.js 24
       uses: actions/setup-node@v4
@@ -27,23 +27,13 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
-        cache-disabled: true # Kept this here in case GitHub's cache service continues to glitch
-
-    - name: Grant Execute Permission for Gradlew
-      run: chmod +x gradlew # Ensures Linux has permission to run the wrapper script
+        cache-disabled: true # Kept this here in case GitHub's cache service glitches
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug # Compiles your Java app into an installable APK using the wrapper
+      run: gradle assembleDebug # Uses the runner's pre-installed system Gradle directly
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
         name: DocumentGenerator-APK
-        path: app/build/outputs/apk/debug/app-debug.apk # Grabs the compiled file
-    - name: Grant Execute Permission for Gradlew
-      run: chmod +x gradlew
-      working-directory: ./app # <-- Change this to your subfolder name if different
-
-    - name: Build Debug APK
-      run: ./gradlew assembleDebug
-      working-directory: ./app # <-- Change this to your subfolder name if different
+        path: "**/build/outputs/apk/debug/*-debug.apk" # Double asterisks wildcards search everywhere for the APK file automatically
