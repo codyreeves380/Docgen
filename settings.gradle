@@ -5,7 +5,12 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-
-// All other statements must come AFTER the pluginManagement block
-rootProject.name = 'Docgen'
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()        // <-- Ensure this is here
+        mavenCentral()  // <-- Ensure this is here
+    }
+}
+rootProject.name = "Docgen"
 include ':app'
