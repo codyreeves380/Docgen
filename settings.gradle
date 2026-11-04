@@ -4,13 +4,19 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    plugins {
+        // Explicitly declares the version of the Android build tool plugin
+        id 'com.android.application' version '8.2.2' 
+    }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()        // <-- Ensure this is here
-        mavenCentral()  // <-- Ensure this is here
+        google()
+        mavenCentral()
     }
 }
-rootProject.name = "Docgen"
+
+rootProject.name = 'Docgen'
 include ':app'
