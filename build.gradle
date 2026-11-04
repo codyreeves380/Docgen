@@ -10,10 +10,31 @@ repositories {
 }
 
 android {
-    namespace 'com.example.docgen' // Adjust to your actual package namespace
-    compileSdk 34
-    // ... rest of your android setup
+    // ADD THIS LINE TO FIX THE ERROR:
+    compileSdk 34  
+
+    defaultConfig {
+        applicationId "com.example.docgen" // Replace with your actual package name
+        minSdk 24                           // Minimum supported Android version
+        targetSdk 34                        // Target Android version
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    
+    // Explicitly enforce Java 17 compatibility for your source files
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
+
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
