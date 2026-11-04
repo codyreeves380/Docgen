@@ -1,25 +1,23 @@
 plugins {
-    id 'com.android.application' version '8.2.2'
+    id 'com.android.application'
+    // Your other plugins here...
+}
+
+// ADD THIS BLOCK TO FIX THE ERROR:
+repositories {
+    google()          // Needed for AndroidX and Material Design components
+    mavenCentral()    // Needed for Apache POI and XMLBeans
 }
 
 android {
-    namespace 'com.yourname.docgen'
+    namespace 'com.example.docgen' // Adjust to your actual package namespace
     compileSdk 34
-
-    defaultConfig {
-        applicationId "com.yourname.docgen"
-        minSdk 26
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-    }
+    // ... rest of your android setup
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    
-    // Apache POI Libraries for Word documents
     implementation 'org.apache.poi:poi:5.2.3'
     implementation 'org.apache.poi:poi-ooxml:5.2.3'
     implementation 'org.apache.xmlbeans:xmlbeans:5.1.1'
