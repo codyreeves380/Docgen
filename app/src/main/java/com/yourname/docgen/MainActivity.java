@@ -15,7 +15,7 @@ import java.util.Map;
 public class MainActivity extends Activity {
     private static final int PICK_DOCX_FILE = 1;
     
-    private EditText inputDefendant, inputCauseNo, inputDate, inputDefId;
+    private EditText inputDefendant, inputCauseNo, inputDate, inputDefId, inputDeposit, inputDay, inputYear, inputMonth;
     private Button btnSelectFile, btnGenerate;
     private TextView txtSelectedFile, txtStatus;
     private Uri selectedFileUri = null; // Stores file reference from manager
@@ -29,6 +29,10 @@ public class MainActivity extends Activity {
         inputCauseNo = findViewById(R.id.input_causeno);
         inputDate = findViewById(R.id.input_date);
         inputDefId = findViewById(R.id.input_defid);
+        inputDeposit = findViewById(R.id.input_defid);
+        inputDay = findViewById(R.id.input_defid);
+        inputMonth = findViewById(R.id.input_defid);
+        inputYear = findViewById(R.id.input_defid);
         btnSelectFile = findViewById(R.id.btn_select_file);
         btnGenerate = findViewById(R.id.btn_generate);
         txtSelectedFile = findViewById(R.id.txt_selected_file);
