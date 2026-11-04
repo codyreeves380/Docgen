@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class MainActivity extends Activity {
     private static final int PICK_DOCX_FILE = 1;
-    
+
     private EditText inputDefendant, inputCauseNo, inputDate, inputDefId, inputDeposit, inputDay, inputYear, inputMonth;
     private Button btnSelectFile, btnGenerate;
     private TextView txtSelectedFile, txtStatus;
@@ -29,10 +29,10 @@ public class MainActivity extends Activity {
         inputCauseNo = findViewById(R.id.input_causeno);
         inputDate = findViewById(R.id.input_date);
         inputDefId = findViewById(R.id.input_defid);
-        inputDeposit = findViewById(R.id.input_defid);
-        inputDay = findViewById(R.id.input_defid);
-        inputMonth = findViewById(R.id.input_defid);
-        inputYear = findViewById(R.id.input_defid);
+        inputDeposit = findViewById(R.id.input_deposit);
+        inputDay = findViewById(R.id.input_day);
+        inputMonth = findViewById(R.id.input_month);
+        inputYear = findViewById(R.id.input_year);
         btnSelectFile = findViewById(R.id.btn_select_file);
         btnGenerate = findViewById(R.id.btn_generate);
         txtSelectedFile = findViewById(R.id.txt_selected_file);
@@ -79,12 +79,12 @@ public class MainActivity extends Activity {
         replacements.put("[[CAUSENO]]", inputCauseNo.getText().toString().trim());
         replacements.put("[[DATE]]", inputDate.getText().toString().trim());
         replacements.put("[[DEFID]]", inputDefId.getText().toString().trim());
-        replacements.put("[[DEPOSIT]]", inputDefId.getText().toString().trim());
-        replacements.put("[[DAY]]", inputDefId.getText().toString().trim());
-        replacements.put("[[MONTH]]", inputDefId.getText().toString().trim());
-        replacements.put("[[YEAR]]", inputDefId.getText().toString().trim());
+        replacements.put("[[DEPOSIT]]", inputDeposit.getText().toString().trim());
+        replacements.put("[[DAY]]", inputDay.getText().toString().trim());
+        replacements.put("[[MONTH]]", inputMonth.getText().toString().trim());
+        replacements.put("[[YEAR]]", inputYear.getText().toString().trim());
 
-        if(replacements.get("[[DEFENDANT]]").isEmpty() || replacements.get("[[CAUSENO]]").isEmpty()) {
+        if (replacements.get("[[DEFENDANT]]").isEmpty() || replacements.get("[[CAUSENO]]").isEmpty()) {
             txtStatus.setText("Status: Please enter Defendant and Cause No!");
             return;
         }
@@ -110,14 +110,14 @@ public class MainActivity extends Activity {
                 }
             }
 
-            // Write output cleanly to public Downloads folder 
+            // Write output cleanly to public Downloads folder
             File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             String cleanName = (replacements.get("[[DEFENDANT]]") + "_" + replacements.get("[[CAUSENO]]")).replace(" ", "_");
             File outputFile = new File(downloadsDir, cleanName + ".docx");
 
             FileOutputStream fos = new FileOutputStream(outputFile);
             doc.write(fos);
-            
+
             fos.close();
             doc.close();
             is.close();
