@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.application' version '8.2.2'
 }
 
 android {
@@ -16,11 +16,10 @@ android {
 }
 
 dependencies {
-    // Standard Android UI libraries
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     
-    // Apache POI Libraries for Microsoft Word processing
+    // Apache POI Libraries for Word documents
     implementation 'org.apache.poi:poi:5.2.3'
     implementation 'org.apache.poi:poi-ooxml:5.2.3'
     implementation 'org.apache.xmlbeans:xmlbeans:5.1.1'
