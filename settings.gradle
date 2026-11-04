@@ -1,6 +1,3 @@
-include ':app'
-
-
 pluginManagement {
     repositories {
         google()
@@ -8,13 +5,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
 
-rootProject.name = "DocumentGenerator"
+// All other statements must come AFTER the pluginManagement block
+rootProject.name = 'Docgen'
 include ':app'
