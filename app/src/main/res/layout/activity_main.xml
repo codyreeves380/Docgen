@@ -1,0 +1,73 @@
+<ScrollView xmlns:android="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Case Document Generator"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Template File Selection Button -->
+        <Button android:id="@+id/btn_select_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📁 Step 1: Select Word Template"
+            android:background="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:id="@+id/txt_selected_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No file selected"
+            android:textColor="#757575"
+            android:layout_marginBottom="16dp"
+            android:textAlignment="center"/>
+
+        <!-- Form Input Fields -->
+        <EditText android:id="@+id/input_defendant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Defendant Name" />
+
+        <EditText android:id="@+id/input_causeno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cause Number" />
+
+        <EditText android:id="@+id/input_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Date" />
+
+        <EditText android:id="@+id/input_defid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Defendant ID" />
+
+        <!-- Final Action Button -->
+        <Button android:id="@+id/btn_generate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⚙️ Step 2: Generate Document"
+            android:layout_marginTop="20dp"
+            android:background="#2196F3"
+            android:textColor="#FFFFFF"/>
+
+        <TextView android:id="@+id/txt_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status: Ready"
+            android:layout_marginTop="12dp"
+            android:textAlignment="center"/>
+    </LinearLayout>
+</ScrollView>
