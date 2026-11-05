@@ -55,85 +55,213 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/input_defendant"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Defendant Name ([[DEFENDANT]])"
-            android:inputType="textCapWords"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/input_causeno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cause Number ([[CAUSENO]])"
-            android:inputType="text"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            <EditText
+                android:id="@+id/input_defendant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Defendant Name ([[DEFENDANT]])"
+                android:inputType="textCapWords"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
 
-        <EditText
-            android:id="@+id/input_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Full Date ([[DATE]])"
-            android:inputType="date"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            <CheckBox
+                android:id="@+id/save_defendant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/input_defid"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Defendant ID ([[DEFID]])"
-            android:inputType="text"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/input_deposit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Deposit amount ([[DEPOSIT]])"
-            android:inputType="numberDecimal"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            <EditText
+                android:id="@+id/input_causeno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Cause Number ([[CAUSENO]])"
+                android:inputType="text"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
 
-        <EditText
-            android:id="@+id/input_day"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Day ([[DAY]])"
-            android:inputType="text"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            <CheckBox
+                android:id="@+id/save_causeno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/input_month"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Month ([[MONTH]])"
-            android:inputType="text"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/input_year"
+            <EditText
+                android:id="@+id/input_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Full Date ([[DATE]])"
+                android:inputType="date"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Year ([[YEAR]])"
-            android:inputType="number"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_defid"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Defendant ID ([[DEFID]])"
+                android:inputType="text"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_defid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_deposit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Deposit amount ([[DEPOSIT]])"
+                android:inputType="numberDecimal"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_day"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Day ([[DAY]])"
+                android:inputType="text"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_month"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Month ([[MONTH]])"
+                android:inputType="text"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_year"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Year ([[YEAR]])"
+                android:inputType="number"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -145,114 +273,26 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/input_compliance_officer"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Compliance Officer Name ([[CO]])"
-            android:inputType="textCapWords"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/input_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number ([[PHONE]])"
-            android:inputType="phone"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
+            <EditText
+                android:id="@+id/input_compliance_officer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Compliance Officer Name ([[CO]])"
+                android:inputType="textCapWords"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
 
-        <EditText
-            android:id="@+id/input_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email Address ([[EMAIL]])"
-            android:inputType="textEmailAddress"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
-
-        <EditText
-            android:id="@+id/input_badge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="CO Badge ID # ([[BADGE]])"
-            android:inputType="text"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
-
-        <EditText
-            android:id="@+id/input_judge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Judge Name ([[JUDGE]])"
-            android:inputType="textCapWords"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="Program and fees"
-            android:textColor="#F3F6FA"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/input_gps"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="$ for GPS Security Deposit ([[GPS]])"
-            android:inputType="numberDecimal"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
-
-        <EditText
-            android:id="@+id/input_program"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="$ for Program ([[PRO]])"
-            android:inputType="numberDecimal"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
-
-        <EditText
-            android:id="@+id/input_tax"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="$ for TAX ([[TAX]])"
-            android:inputType="numberDecimal"
-            android:textColor="#F3F6FA"
-            android:textColorHint="#AAB7C4"
-            android:backgroundTint="#526273" />
-
-        <Button
-            android:id="@+id/btn_generate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#2878C7"
-            android:text="Step 2: Generate Document"
-            android:textColor="#FFFFFF" />
-
-        <TextView
-            android:id="@+id/txt_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:text="Status: Ready"
-            android:textColor="#AAB7C4"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-</ScrollView>
+            <CheckBox
+                android:id="@+id/save_compliance_officer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
