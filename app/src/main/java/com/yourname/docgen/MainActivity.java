@@ -10,9 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.aspose.words.Document;
-import com.aspose.words.SaveFormat;
-
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -141,30 +138,20 @@ public class MainActivity extends Activity {
 
             File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             String cleanName = (replacements.get("[[DEFENDANT]]") + "_" + replacements.get("[[CAUSENO]]")).replace(" ", "_");
+            File outputDocx = new File(downloadsDir, cleanName + ".docx");
 
-            File tempDocx = new File(downloadsDir, cleanName + "_temp.docx");
-            File outputPdf = new File(downloadsDir, cleanName + ".pdf");
-
-            try (FileOutputStream fos = new FileOutputStream(tempDocx)) {
+            try (FileOutputStream fos = new FileOutputStream(outputDocx)) {
                 doc.write(fos);
             }
 
             doc.close();
             is.close();
 
-            convertDocxToPdf(tempDocx.getAbsolutePath(), outputPdf.getAbsolutePath());
-            tempDocx.delete();
-
-            txtStatus.setText("✅ PDF saved to Downloads folder!");
+            txtStatus.setText("✅ DOCX saved to Downloads folder!");
         } catch (Exception e) {
             txtStatus.setText("❌ Error: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    private void convertDocxToPdf(String inputDocxPath, String outputPdfPath) throws Exception {
-        Document asposeDoc = new Document(inputDocxPath);
-        asposeDoc.save(outputPdfPath, SaveFormat.PDF);
     }
 
     private void replaceTags(XWPFParagraph p, Map<String, String> data) {
