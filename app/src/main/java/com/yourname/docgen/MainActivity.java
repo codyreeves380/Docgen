@@ -6,9 +6,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-import android.widget.*;
-import org.apache.poi.xwpf.usermodel.*;
-import java.io.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.aspose.words.Document;
+import com.aspose.words.SaveFormat;
+
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +33,7 @@ public class MainActivity extends Activity {
     private EditText inputComplianceOfficer, inputPhone, inputEmail, inputBadge, inputGps, inputProgram, inputTax, inputJudge;
     private Button btnSelectFile, btnGenerate;
     private TextView txtSelectedFile, txtStatus;
-    private Uri selectedFileUri = null; // Stores file reference from manager
+    private Uri selectedFileUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,20 +141,30 @@ public class MainActivity extends Activity {
 
             File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             String cleanName = (replacements.get("[[DEFENDANT]]") + "_" + replacements.get("[[CAUSENO]]")).replace(" ", "_");
-            File outputFile = new File(downloadsDir, cleanName + ".docx");
 
-            FileOutputStream fos = new FileOutputStream(outputFile);
-            doc.write(fos);
+            File tempDocx = new File(downloadsDir, cleanName + "_temp.docx");
+            File outputPdf = new File(downloadsDir, cleanName + ".pdf");
 
-            fos.close();
+            try (FileOutputStream fos = new FileOutputStream(tempDocx)) {
+                doc.write(fos);
+            }
+
             doc.close();
             is.close();
 
-            txtStatus.setText("✅ Saved to Downloads folder!");
+            convertDocxToPdf(tempDocx.getAbsolutePath(), outputPdf.getAbsolutePath());
+            tempDocx.delete();
+
+            txtStatus.setText("✅ PDF saved to Downloads folder!");
         } catch (Exception e) {
             txtStatus.setText("❌ Error: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private void convertDocxToPdf(String inputDocxPath, String outputPdfPath) throws Exception {
+        Document asposeDoc = new Document(inputDocxPath);
+        asposeDoc.save(outputPdfPath, SaveFormat.PDF);
     }
 
     private void replaceTags(XWPFParagraph p, Map<String, String> data) {
