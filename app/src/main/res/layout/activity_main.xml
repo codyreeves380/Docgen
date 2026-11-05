@@ -1,129 +1,258 @@
-xml
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:fillViewport="true"
+    android:background="#121820">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Case Document Generator"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="#F3F6FA"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <Button android:id="@+id/btn_select_file"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📁 Step 1: Select Word Template"
-            android:background="#4CAF50"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="20dp"
+            android:text="Enter the details below to prepare your document."
+            android:textColor="#AAB7C4"
+            android:textSize="14sp" />
 
-        <TextView android:id="@+id/txt_selected_file"
+        <Button
+            android:id="@+id/btn_select_file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#16825D"
+            android:text="Step 1: Select Word Template"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/txt_selected_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:text="No file selected"
-            android:textColor="#757575"
-            android:layout_marginBottom="16dp"
-            android:textAlignment="center"/>
+            android:textColor="#AAB7C4"
+            android:textSize="14sp" />
 
-        <EditText android:id="@+id/input_defendant"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Defendant Name" />
+            android:layout_marginBottom="8dp"
+            android:text="Case details"
+            android:textColor="#F3F6FA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <EditText android:id="@+id/input_causeno"
+        <EditText
+            android:id="@+id/input_defendant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cause Number" />
+            android:hint="Defendant Name ([[DEFENDANT]])"
+            android:inputType="textCapWords"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_date"
+        <EditText
+            android:id="@+id/input_causeno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full Date" />
+            android:hint="Cause Number ([[CAUSENO]])"
+            android:inputType="text"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_defid"
+        <EditText
+            android:id="@+id/input_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Defendant ID" />
+            android:hint="Full Date ([[DATE]])"
+            android:inputType="date"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_deposit"
+        <EditText
+            android:id="@+id/input_defid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Deposit amount" />
+            android:hint="Defendant ID ([[DEFID]])"
+            android:inputType="text"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_day"
+        <EditText
+            android:id="@+id/input_deposit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Day 1st" />
+            android:hint="Deposit amount ([[DEPOSIT]])"
+            android:inputType="numberDecimal"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_month"
+        <EditText
+            android:id="@+id/input_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Month" />
+            android:hint="Day ([[DAY]])"
+            android:inputType="text"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_year"
+        <EditText
+            android:id="@+id/input_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Year" />
+            android:hint="Month ([[MONTH]])"
+            android:inputType="text"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_compliance_officer"
+        <EditText
+            android:id="@+id/input_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Compliance Officer Name ([[CO]])" />
+            android:hint="Year ([[YEAR]])"
+            android:inputType="number"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_phone"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Officer and court details"
+            android:textColor="#F3F6FA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/input_compliance_officer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Compliance Officer Name ([[CO]])"
+            android:inputType="textCapWords"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
+
+        <EditText
+            android:id="@+id/input_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone Number ([[PHONE]])"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_email"
+        <EditText
+            android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email Address ([[EMAIL]])"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_badge"
+        <EditText
+            android:id="@+id/input_badge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CO Badge ID # ([[BADGE]])" />
+            android:hint="CO Badge ID # ([[BADGE]])"
+            android:inputType="text"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_gps"
+        <EditText
+            android:id="@+id/input_judge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="$` for GPS Security Deposit ([[GPS]])"
-            android:inputType="numberDecimal" />
+            android:hint="Judge Name ([[JUDGE]])"
+            android:inputType="textCapWords"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_program"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="`$ for Program ([[PRO]])"
-            android:inputType="numberDecimal" />
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Program and fees"
+            android:textColor="#F3F6FA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-        <EditText android:id="@+id/input_tax"
+        <EditText
+            android:id="@+id/input_gps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="$` for TAX ([[TAX]])"
-            android:inputType="numberDecimal" />
+            android:hint="$ for GPS Security Deposit ([[GPS]])"
+            android:inputType="numberDecimal"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <EditText android:id="@+id/input_judge"
+        <EditText
+            android:id="@+id/input_program"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Judge Name ([[JUDGE]])" />
+            android:hint="$ for Program ([[PRO]])"
+            android:inputType="numberDecimal"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <Button android:id="@+id/btn_generate"
+        <EditText
+            android:id="@+id/input_tax"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="⚙️ Step 2: Generate Document"
-            android:layout_marginTop="20dp"
-            android:background="#2196F3"
-            android:textColor="#FFFFFF"/>
+            android:hint="$ for TAX ([[TAX]])"
+            android:inputType="numberDecimal"
+            android:textColor="#F3F6FA"
+            android:textColorHint="#AAB7C4"
+            android:backgroundTint="#526273" />
 
-        <TextView android:id="@
+        <Button
+            android:id="@+id/btn_generate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#2878C7"
+            android:text="Step 2: Generate Document"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="Status: Ready"
+            android:textColor="#AAB7C4"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</ScrollView>
