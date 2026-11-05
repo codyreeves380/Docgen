@@ -12,7 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Textimport org.apache.poi.xwpf.usermodel.XWPFDocument;
+import android.widget.Text
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
@@ -216,4 +217,47 @@ public class MainActivity extends Activity {
 
         if (replacements.get("[[DEFENDANT]]").isEmpty()
                 || replacements.get("[[CAUSENO]]").isEmpty()) {
-            txtStatus.setText("Status: Please enter Defendant and Cause No!");
+                        txtStatus.setText("Status: Please enter Defendant and Cause No!");
+            return;
+        }
+
+        File outputDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        if (outputDir == null) {
+            txtStatus.setText("Status: Could not access the Documents folder.");
+            return;
+        }
+
+        if (!outputDir.exists() && !outputDir.mkdirs()) {
+            txtStatus.setText("Status: Could not create the Documents folder.");
+            return;
+        }
+
+        File outputFile = new File(
+                outputDir,
+                "Generated_" + System.currentTimeMillis() + ".docx");
+
+        try (InputStream input = getContentResolver()
+                     .openInputStream(selectedFileUri)) {
+            if (input == null) {
+                txtStatus.setText("Status: Could not open the selected template.");
+                return;
+            }
+
+            try (XWPFDocument document = new XWPFDocument(input)) {
+                replaceInParagraphs(document.getParagraphs(), replacements);
+
+                for (XWPFTable table : document.getTables()) {
+                    replaceInTable(table, replacements);
+                }
+
+                try (FileOutputStream output = new FileOutputStream(outputFile)) {
+                    document.write(output);
+                }
+            }
+
+            txtStatus.setText("Status: Generated " + outputFile.getName());
+        } catch (Exception e) {
+            txtStatus.setText("Status: Document generation failed: "
+                    + e.getMessage());
+        }
+                         }
