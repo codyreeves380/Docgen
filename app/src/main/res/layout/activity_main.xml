@@ -16,7 +16,6 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
 
-        <!-- Template File Selection Button -->
         <Button android:id="@+id/btn_select_file"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +32,6 @@
             android:layout_marginBottom="16dp"
             android:textAlignment="center"/>
 
-        <!-- Form Input Fields -->
         <EditText android:id="@+id/input_defendant"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,32 +51,160 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Defendant ID" />
-        
+
         <EditText android:id="@+id/input_deposit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Deposit amount" />
-        
+
         <EditText android:id="@+id/input_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Day 1st" />
-        
+
         <EditText android:id="@+id/input_month"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Month" />
-        
+
         <EditText android:id="@+id/input_year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Year" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_co"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Compliance Officer Name" />
+            <CheckBox android:id="@+id/save_co"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Your Phone Number"
+                android:inputType="phone" />
+            <CheckBox android:id="@+id/save_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Your Email Address"
+                android:inputType="textEmailAddress" />
+            <CheckBox android:id="@+id/save_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_badge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Your Badge ID" />
+            <CheckBox android:id="@+id/save_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
 
-        <!-- Final Action Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_gps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="$ for GPS Deposit"
+                android:inputType="numberDecimal" />
+            <CheckBox android:id="@+id/save_gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_pro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="$ for Program"
+                android:inputType="numberDecimal" />
+            <CheckBox android:id="@+id/save_pro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_tax"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="All state and county tax"
+                android:inputType="numberDecimal" />
+            <CheckBox android:id="@+id/save_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <EditText android:id="@+id/input_judge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Judge Name" />
+            <CheckBox android:id="@+id/save_judge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save" />
+        </LinearLayout>
+
         <Button android:id="@+id/btn_generate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
