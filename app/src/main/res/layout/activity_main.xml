@@ -296,3 +296,219 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="#16825D"
                 android:text="Save"
+                                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Phone Number ([[PHONE]])"
+                android:inputType="phone"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Email Address ([[EMAIL]])"
+                android:inputType="textEmailAddress"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_badge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="CO Badge ID # ([[BADGE]])"
+                android:inputType="text"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_judge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="Judge Name ([[JUDGE]])"
+                android:inputType="textCapWords"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_judge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Program and fees"
+            android:textColor="#F3F6FA"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_gps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="$ for GPS Security Deposit ([[GPS]])"
+                android:inputType="numberDecimal"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_gps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_program"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="$ for Program ([[PRO]])"
+                android:inputType="numberDecimal"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/input_tax"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#526273"
+                android:hint="$ for TAX ([[TAX]])"
+                android:inputType="numberDecimal"
+                android:textColor="#F3F6FA"
+                android:textColorHint="#AAB7C4" />
+
+            <CheckBox
+                android:id="@+id/save_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#16825D"
+                android:text="Save"
+                android:textColor="#F3F6FA" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_generate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#2878C7"
+            android:text="Step 2: Generate Document"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/txt_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="Status: Ready"
+            android:textColor="#AAB7C4"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</ScrollView>
