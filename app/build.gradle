@@ -14,3 +14,8 @@ android {
         versionName '1.0'
     }
 }
+
+dependencies {
+    // poi-ooxml brings in the POI core and XMLBeans dependencies required by XWPF.
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+}
