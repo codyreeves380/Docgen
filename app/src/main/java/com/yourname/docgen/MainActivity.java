@@ -14,15 +14,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.wml.Text;
+import com.aspose.words.Document;
+import com.aspose.words.FindReplaceOptions;
+import com.aspose.words.SaveFormat;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
@@ -36,7 +35,7 @@ public class MainActivity extends Activity {
 
     private Button btnSelectFile, btnGenerate;
     private TextView txtSelectedFile, txtStatus;
-    private Uri selectedFileUri = null;
+    private Uri selectedFileUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +87,10 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType(
-                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+                intent.setType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(
-                        Intent.createChooser(intent, "Select Template File"),
-                        PICK_DOCX_FILE);
+                        Intent.createChooser(intent, "Select Template File"), PICK_DOCX_FILE);
             }
         });
 
@@ -204,27 +201,15 @@ public class MainActivity extends Activity {
                 return;
             }
 
-            WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(input);
-            MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
-            List<Object> textNodes = documentPart.getJAXBNodesViaXPath("//w:t", true);
-
-            for (Object node : textNodes) {
-                Object unwrapped = org.docx4j.XmlUtils.unwrap(node);
-                if (unwrapped instanceof Text) {
-                    Text text = (Text) unwrapped;
-                    String value = text.getValue();
-                    if (value == null) {
-                        continue;
-                    }
-                    for (Map.Entry<String, String> replacement : replacements.entrySet()) {
-                        value = value.replace(replacement.getKey(), replacement.getValue());
-                    }
-                    text.setValue(value);
-                }
+            Document document = new Document(input);
+            FindReplaceOptions options = new FindReplaceOptions();
+            for (Map.Entry<String, String> replacement : replacements.entrySet()) {
+                document.getRange().replace(
+                        replacement.getKey(), replacement.getValue(), options);
             }
 
             try (FileOutputStream output = new FileOutputStream(outputFile)) {
-                wordMLPackage.save(output);
+                document.save(output, SaveFormat.DOCX);
             }
             txtStatus.setText("Status: Generated " + outputFile.getName());
         } catch (Exception e) {
