@@ -107,7 +107,6 @@
                 android:textColor="#F3F6FA" />
         </LinearLayout>
 
-    
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,7 +133,6 @@
                 android:textColor="#F3F6FA" />
         </LinearLayout>
 
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -145,21 +143,20 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-    
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal">   
-           
+            android:orientation="horizontal">
+
             <EditText
                 android:id="@+id/input_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#526273"
-                android:hint="Full Date xx-xx-xxxx)"
-                android:inputType="date"
+                android:hint="Full Date xx-xx-xxxx"
+                android:inputType="text"
                 android:textColor="#F3F6FA"
                 android:textColorHint="#AAB7C4" />
 
@@ -172,7 +169,6 @@
                 android:textColor="#F3F6FA" />
         </LinearLayout>
 
-        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -284,7 +280,7 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="#16825D"
                 android:text="Save"
-                                android:textColor="#F3F6FA" />
+                android:textColor="#F3F6FA" />
         </LinearLayout>
 
         <LinearLayout
@@ -479,7 +475,6 @@
                 android:textColor="#F3F6FA" />
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -492,7 +487,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="#526273"
-                android:hint="Total price(GPS+PRO+TAX)"
+                android:hint="Total price (GPS + PRO + TAX)"
                 android:inputType="text"
                 android:textColor="#F3F6FA"
                 android:textColorHint="#AAB7C4" />
@@ -506,8 +501,6 @@
                 android:textColor="#F3F6FA" />
         </LinearLayout>
 
-
-        
         <Button
             android:id="@+id/btn_generate"
             android:layout_width="match_parent"
