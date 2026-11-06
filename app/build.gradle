@@ -1,17 +1,18 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.application' version '9.5.0' apply false
 }
 
 android {
     namespace 'com.yourname.docgen'
-    compileSdk 34
+    compileSdk 37
 
     defaultConfig {
         applicationId 'com.yourname.docgen'
         minSdk 26
-        targetSdk 34
+        targetSdk 37
         versionCode 1
         versionName '1.0'
+    
     }
 }
 
