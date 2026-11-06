@@ -16,6 +16,7 @@ android {
 }
 
 dependencies {
-    // poi-ooxml brings in the POI core and XMLBeans dependencies required by XWPF.
-    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'org.docx4j:docx4j-android:8.1.7'
 }
