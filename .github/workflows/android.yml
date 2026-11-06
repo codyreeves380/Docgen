@@ -27,7 +27,7 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
       with:
-        cache-disabled: true # Kept this here in case GitHub's cache service glitches
+           gradle-version: '9.8.2'
 
     - name: Build Debug APK
       run: gradle assembleDebug # Uses the runner's pre-installed system Gradle directly
