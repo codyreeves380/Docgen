@@ -12,7 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Text
+import android.widget.TextView;
+
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
@@ -217,7 +219,7 @@ public class MainActivity extends Activity {
 
         if (replacements.get("[[DEFENDANT]]").isEmpty()
                 || replacements.get("[[CAUSENO]]").isEmpty()) {
-                        txtStatus.setText("Status: Please enter Defendant and Cause No!");
+            txtStatus.setText("Status: Please enter Defendant and Cause No!");
             return;
         }
 
@@ -260,4 +262,50 @@ public class MainActivity extends Activity {
             txtStatus.setText("Status: Document generation failed: "
                     + e.getMessage());
         }
-                         }
+    }
+
+    private void replaceInParagraphs(
+            Iterable<XWPFParagraph> paragraphs,
+            Map<String, String> replacements) {
+        for (XWPFParagraph paragraph : paragraphs) {
+            List<XWPFRun> runs = paragraph.getRuns();
+            if (runs.isEmpty()) {
+                continue;
+            }
+
+            StringBuilder paragraphText = new StringBuilder();
+            for (XWPFRun run : runs) {
+                String runText = run.getText(0);
+                if (runText != null) {
+                    paragraphText.append(runText);
+                }
+            }
+
+            String updatedText = paragraphText.toString();
+            for (Map.Entry<String, String> replacement : replacements.entrySet()) {
+                updatedText = updatedText.replace(
+                        replacement.getKey(), replacement.getValue());
+            }
+
+            if (!updatedText.equals(paragraphText.toString())) {
+                runs.get(0).setText(updatedText, 0);
+                for (int i = 1; i < runs.size(); i++) {
+                    runs.get(i).setText("", 0);
+                }
+            }
+        }
+    }
+
+    private void replaceInTable(
+            XWPFTable table,
+            Map<String, String> replacements) {
+        for (XWPFTableRow row : table.getRows()) {
+            for (XWPFTableCell cell : row.getTableCells()) {
+                replaceInParagraphs(cell.getParagraphs(), replacements);
+                for (XWPFTable nestedTable : cell.getTables()) {
+                    replaceInTable(nestedTable, replacements);
+                }
+            }
+        }
+    }
+}
