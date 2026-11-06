@@ -13,18 +13,19 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.aspose.words.Document;
-import com.aspose.words.FindReplaceOptions;
-import com.aspose.words.SaveFormat;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.wml.Text;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
     private static final int PICK_DOCX_FILE = 1;
-    private static final int CREATE_DOCX_FILE = 2;
     private static final String PREFS_NAME = "saved_form_inputs";
 
     private EditText inputDefendant, inputCauseNo, inputDate, inputDefId;
@@ -34,8 +35,7 @@ public class MainActivity extends Activity {
 
     private Button btnSelectFile, btnGenerate;
     private TextView txtSelectedFile, txtStatus;
-    private Uri selectedFileUri;
-    private Map<String, String> pendingReplacements;
+    private Uri selectedFileUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +86,12 @@ public class MainActivity extends Activity {
         btnSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                 intent.setType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-                startActivityForResult(intent, PICK_DOCX_FILE);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(
+                        Intent.createChooser(intent, "Select Template File"),
+                        PICK_DOCX_FILE);
             }
         });
 
@@ -143,26 +145,11 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK || data == null || data.getData() == null) {
-            if (requestCode == CREATE_DOCX_FILE) {
-                txtStatus.setText("Status: Save cancelled.");
-            }
-            return;
-        }
-
-        Uri resultUri = data.getData();
-        if (requestCode == PICK_DOCX_FILE) {
-            selectedFileUri = resultUri;
-            int takeFlags = data.getFlags() & Intent.FLAG_GRANT_READ_URI_PERMISSION;
-            try {
-                getContentResolver().takePersistableUriPermission(resultUri, takeFlags);
-            } catch (SecurityException ignored) {
-                // Some document providers grant only temporary access.
-            }
-            txtSelectedFile.setText("Selected: " + resultUri.getLastPathSegment());
+        if (requestCode == PICK_DOCX_FILE && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            selectedFileUri = data.getData();
+            txtSelectedFile.setText("Selected: " + selectedFileUri.getLastPathSegment());
             txtStatus.setText("Status: Template Loaded.");
-        } else if (requestCode == CREATE_DOCX_FILE) {
-            writeGeneratedDocument(resultUri);
         }
     }
 
@@ -196,20 +183,18 @@ public class MainActivity extends Activity {
             return;
         }
 
-        pendingReplacements = replacements;
-        Intent createIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-        createIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        createIntent.setType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-        createIntent.putExtra(Intent.EXTRA_TITLE,
-                "Generated_" + System.currentTimeMillis() + ".docx");
-        startActivityForResult(createIntent, CREATE_DOCX_FILE);
-    }
-
-    private void writeGeneratedDocument(Uri outputUri) {
-        if (pendingReplacements == null || selectedFileUri == null) {
-            txtStatus.setText("Status: Missing template or form data.");
+        File outputDir = getExternalFilesDir("Documents");
+        if (outputDir == null) {
+            txtStatus.setText("Status: Could not access the Documents folder.");
             return;
         }
+        if (!outputDir.exists() && !outputDir.mkdirs()) {
+            txtStatus.setText("Status: Could not create the Documents folder.");
+            return;
+        }
+
+        File outputFile = new File(outputDir,
+                "Generated_" + System.currentTimeMillis() + ".docx");
 
         try (InputStream input = getContentResolver().openInputStream(selectedFileUri)) {
             if (input == null) {
@@ -217,22 +202,29 @@ public class MainActivity extends Activity {
                 return;
             }
 
-            Document document = new Document(input);
-            FindReplaceOptions options = new FindReplaceOptions();
-            for (Map.Entry<String, String> replacement : pendingReplacements.entrySet()) {
-                document.getRange().replace(
-                        replacement.getKey(), replacement.getValue(), options);
+            WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(input);
+            MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
+            List<Object> textNodes = documentPart.getJAXBNodesViaXPath("//w:t", true);
+
+            for (Object node : textNodes) {
+                Object unwrapped = org.docx4j.XmlUtils.unwrap(node);
+                if (unwrapped instanceof Text) {
+                    Text text = (Text) unwrapped;
+                    String value = text.getValue();
+                    if (value == null) {
+                        continue;
+                    }
+                    for (Map.Entry<String, String> replacement : replacements.entrySet()) {
+                        value = value.replace(replacement.getKey(), replacement.getValue());
+                    }
+                    text.setValue(value);
+                }
             }
 
-            try (OutputStream output = getContentResolver().openOutputStream(outputUri, "w")) {
-                if (output == null) {
-                    txtStatus.setText("Status: Could not create the output document.");
-                    return;
-                }
-                document.save(output, SaveFormat.DOCX);
+            try (FileOutputStream output = new FileOutputStream(outputFile)) {
+                wordMLPackage.save(output);
             }
-            txtStatus.setText("Status: Generated document saved.");
-            pendingReplacements = null;
+            txtStatus.setText("Status: Generated " + outputFile.getName());
         } catch (Exception e) {
             txtStatus.setText("Status: Document generation failed: " + e.getMessage());
         }
