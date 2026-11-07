@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +21,8 @@ import org.docx4j.wml.Text;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +30,7 @@ import java.util.Map;
 public class MainActivity extends Activity {
     private static final int PICK_DOCX_FILE = 1;
     private static final String PREFS_NAME = "saved_form_inputs";
+    private static final String TAG = "Docgen";
 
     private EditText inputDefendant, inputCauseNo, inputDate, inputDefId;
     private EditText inputDeposit, inputDay, inputYear, inputMonth;
@@ -153,6 +157,18 @@ public class MainActivity extends Activity {
         }
     }
 
+    private static String formatThrowable(Throwable t) {
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        t.printStackTrace(pw);
+        pw.flush();
+        String stack = sw.toString();
+        if (stack.length() > 2000) {
+            return stack.substring(0, 2000) + "\n...[truncated]";
+        }
+        return stack;
+    }
+
     private void runDocumentGeneration() {
         if (selectedFileUri == null) {
             txtStatus.setText("Status: Please select a template file first!");
@@ -225,8 +241,11 @@ public class MainActivity extends Activity {
                 wordMLPackage.save(output);
             }
             txtStatus.setText("Status: Generated " + outputFile.getName());
-        } catch (Exception e) {
-            txtStatus.setText("Status: Document generation failed: " + e.getMessage());
+        } catch (Throwable t) {
+            Log.e(TAG, "Document generation failed", t);
+            String message = "Status: Document generation failed: " + t.getClass().getSimpleName()
+                    + ": " + t.getMessage() + "\n" + formatThrowable(t);
+            txtStatus.setText(message);
         }
     }
 }
