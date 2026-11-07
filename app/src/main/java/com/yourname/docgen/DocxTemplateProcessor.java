@@ -10,9 +10,8 @@ import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,10 +36,10 @@ final class DocxTemplateProcessor {
     private DocxTemplateProcessor() {
     }
 
-    static void generate(InputStream template, File outputFile,
+    static void generate(InputStream template, OutputStream output,
                          Map<String, String> replacements) throws Exception {
         try (ZipInputStream zipInput = new ZipInputStream(template);
-             ZipOutputStream zipOutput = new ZipOutputStream(new FileOutputStream(outputFile))) {
+             ZipOutputStream zipOutput = new ZipOutputStream(output)) {
             ZipEntry entry;
             byte[] buffer = new byte[8192];
             boolean foundDocument = false;
