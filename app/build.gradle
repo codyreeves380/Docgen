@@ -17,6 +17,7 @@ android {
     packaging {
         resources {
             pickFirsts += 'META-INF/LICENSE.md'
+            pickFirsts += 'META-INF/NOTICE.md'
         }
     }
 }
