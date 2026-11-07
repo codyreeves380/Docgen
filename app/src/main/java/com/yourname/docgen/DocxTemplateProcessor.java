@@ -17,7 +17,6 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
-import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -41,6 +40,7 @@ final class DocxTemplateProcessor {
              ZipOutputStream zipOutput = new ZipOutputStream(new FileOutputStream(outputFile))) {
             ZipEntry entry;
             byte[] buffer = new byte[8192];
+            boolean foundDocument = false;
             while ((entry = zipInput.getNextEntry()) != null) {
                 ZipEntry outputEntry = new ZipEntry(entry.getName());
                 if (entry.getTime() >= 0) {
@@ -49,6 +49,7 @@ final class DocxTemplateProcessor {
                 zipOutput.putNextEntry(outputEntry);
 
                 if (DOCUMENT_XML.equals(entry.getName())) {
+                    foundDocument = true;
                     ByteArrayOutputStream xml = new ByteArrayOutputStream();
                     int count;
                     while ((count = zipInput.read(buffer)) != -1) {
@@ -65,6 +66,9 @@ final class DocxTemplateProcessor {
                 zipOutput.closeEntry();
                 zipInput.closeEntry();
             }
+            if (!foundDocument) {
+                throw new IllegalArgumentException("Selected file is not a valid DOCX: word/document.xml is missing.");
+            }
         }
     }
 
@@ -77,8 +81,6 @@ final class DocxTemplateProcessor {
         factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
         factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
-        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 
         Document document = factory.newDocumentBuilder().parse(
                 new InputSource(new ByteArrayInputStream(xmlBytes)));
@@ -92,8 +94,6 @@ final class DocxTemplateProcessor {
         }
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
         transformer.setOutputProperty(OutputKeys.METHOD, "xml");
