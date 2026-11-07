@@ -14,8 +14,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.File;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
@@ -23,8 +23,11 @@ import java.util.Map;
 
 public class MainActivity extends Activity {
     private static final int PICK_DOCX_FILE = 1;
+    private static final int CREATE_DOCX_FILE = 2;
     private static final String PREFS_NAME = "saved_form_inputs";
     private static final String TAG = "Docgen";
+    private static final String DOCX_MIME_TYPE =
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
     private EditText inputDefendant, inputCauseNo, inputDate, inputDefId;
     private EditText inputDeposit, inputDay, inputYear, inputMonth;
@@ -34,6 +37,7 @@ public class MainActivity extends Activity {
     private Button btnSelectFile, btnGenerate;
     private TextView txtSelectedFile, txtStatus;
     private Uri selectedFileUri = null;
+    private Map<String, String> pendingReplacements;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +89,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+                intent.setType(DOCX_MIME_TYPE);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(
                         Intent.createChooser(intent, "Select Template File"),
@@ -148,6 +152,12 @@ public class MainActivity extends Activity {
             selectedFileUri = data.getData();
             txtSelectedFile.setText("Selected: " + selectedFileUri.getLastPathSegment());
             txtStatus.setText("Status: Template Loaded.");
+        } else if (requestCode == CREATE_DOCX_FILE && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            saveGeneratedDocument(data.getData());
+        } else if (requestCode == CREATE_DOCX_FILE) {
+            pendingReplacements = null;
+            txtStatus.setText("Status: Save cancelled.");
         }
     }
 
@@ -193,31 +203,36 @@ public class MainActivity extends Activity {
             return;
         }
 
-        File outputDir = getExternalFilesDir("Documents");
-        if (outputDir == null) {
-            txtStatus.setText("Status: Could not access the Documents folder.");
-            return;
-        }
-        if (!outputDir.exists() && !outputDir.mkdirs()) {
-            txtStatus.setText("Status: Could not create the Documents folder.");
-            return;
-        }
-
-        File outputFile = new File(outputDir,
+        pendingReplacements = replacements;
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType(DOCX_MIME_TYPE);
+        intent.putExtra(Intent.EXTRA_TITLE,
                 "Generated_" + System.currentTimeMillis() + ".docx");
+        txtStatus.setText("Status: Choose where to save the generated document.");
+        startActivityForResult(intent, CREATE_DOCX_FILE);
+    }
 
-        try (InputStream input = getContentResolver().openInputStream(selectedFileUri)) {
-            if (input == null) {
-                txtStatus.setText("Status: Could not open the selected template.");
+    private void saveGeneratedDocument(Uri outputUri) {
+        if (pendingReplacements == null) {
+            txtStatus.setText("Status: No document is ready to save.");
+            return;
+        }
+        try (InputStream input = getContentResolver().openInputStream(selectedFileUri);
+             OutputStream output = getContentResolver().openOutputStream(outputUri)) {
+            if (input == null || output == null) {
+                txtStatus.setText("Status: Could not open the template or output document.");
                 return;
             }
-            DocxTemplateProcessor.generate(input, outputFile, replacements);
-            txtStatus.setText("Status: Generated " + outputFile.getName());
+            DocxTemplateProcessor.generate(input, output, pendingReplacements);
+            txtStatus.setText("Status: Document saved successfully.");
         } catch (Throwable t) {
             Log.e(TAG, "Document generation failed", t);
             String message = "Status: Document generation failed: " + t.getClass().getSimpleName()
                     + ": " + t.getMessage() + "\n" + formatThrowable(t);
             txtStatus.setText(message);
+        } finally {
+            pendingReplacements = null;
         }
     }
 }
