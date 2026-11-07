@@ -18,5 +18,6 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
-    implementation 'org.docx4j:docx4j-android:8.1.7'
+    implementation 'org.docx4j:docx4j:8.3.9'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
 }
