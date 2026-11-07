@@ -14,17 +14,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.wml.Text;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
@@ -217,29 +211,7 @@ public class MainActivity extends Activity {
                 txtStatus.setText("Status: Could not open the selected template.");
                 return;
             }
-
-            WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(input);
-            MainDocumentPart documentPart = wordMLPackage.getMainDocumentPart();
-            List<Object> textNodes = documentPart.getJAXBNodesViaXPath("//w:t", true);
-
-            for (Object node : textNodes) {
-                Object unwrapped = org.docx4j.XmlUtils.unwrap(node);
-                if (unwrapped instanceof Text) {
-                    Text text = (Text) unwrapped;
-                    String value = text.getValue();
-                    if (value == null) {
-                        continue;
-                    }
-                    for (Map.Entry<String, String> replacement : replacements.entrySet()) {
-                        value = value.replace(replacement.getKey(), replacement.getValue());
-                    }
-                    text.setValue(value);
-                }
-            }
-
-            try (FileOutputStream output = new FileOutputStream(outputFile)) {
-                wordMLPackage.save(output);
-            }
+            DocxTemplateProcessor.generate(input, outputFile, replacements);
             txtStatus.setText("Status: Generated " + outputFile.getName());
         } catch (Throwable t) {
             Log.e(TAG, "Document generation failed", t);
